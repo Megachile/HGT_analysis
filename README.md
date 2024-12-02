@@ -5,6 +5,7 @@ Documentation for reproducing analysis of the Quercus virginiana and Belonocnema
 Data sources: 
 
 Quercus virginiana (provided privately)
+
 Belonocnema kinseyi (Build: GCF_010883055.1/B_treatae_v1)
 1. Insect References:
    - Apis mellifera (Build: GCF_003254395.2/Amel_HAv3.1)

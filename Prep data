@@ -1,3 +1,4 @@
+conda activate genomics
 
 mkdir -p input_sequences
 

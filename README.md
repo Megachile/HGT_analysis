@@ -10,7 +10,7 @@ conda activate genomics
 
 # Data sources: 
 
-Quercus virginiana (provided privately)
+Quercus virginiana (HAP1; Q_virginiana_protein_prefixed.faa; provided privately)
 
 Belonocnema kinseyi (Build: GCF_010883055.1/B_treatae_v1)
 1. Insect References:

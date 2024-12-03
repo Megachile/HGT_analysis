@@ -32,28 +32,45 @@ Belonocnema kinseyi (Build: GCF_010883055.1/B_treatae_v1)
 - Source: ftp.ncbi.nlm.nih.gov/refseq/release/fungi/fungi.*.protein.faa.gz
 - Database created using makeblastdb with protein sequence type (-dbtype prot)
 
-# Analysis:
-
-HGT Candidate Filtering Criteria:
-- Minimum bacterial identity: 75%
-- Maximum insect/plant identity: 50%
-- Minimum difference: 20%
-- Maximum identity: 90% (to exclude universally conserved proteins)
-
 # Scripts: 
 
 ## Prep data:
 Prep data file contains code to be run in the console to acquire, unzip, concatenate, and make BLAST dbs for each dataset
 
 ## Run BLASTP:
+wasp_to_reference.sh:
+blasts the B kinseyi proteins against Q virginiana, N vitripennis, and A mellifera sequences
+
+oak_to_reference.sh:
+blasts the Q virginiana proteins against B kinseyi, P trichocarpa, and A thaliana sequences
 
 blastp_wasp_vs_bact.sh:
-blasts the B kinseyi genome against N vitripennis, A mellifera, and the combined bacterial sequences
+blasts the B kinseyi proteins against N vitripennis, A mellifera, and the combined bacterial sequences
+
+blastp_oak_bact.sh:
+blasts the Q virginiana proteins against P trichocarpa, A thaliana, and the combined bacterial sequences
 
 blastp_wasp_fungal.sh: 
-blasts the B kinseyi genome against N vitripennis, A mellifera, and the combined fungal sequences
+blasts the B kinseyi proteins against N vitripennis, A mellifera, and the combined fungal sequences
+
+blastp_fungal.sh:
+blasts the Q virginiana proteins against P trichocarpa, A thaliana, and the combined fungal sequences
+
+# Analysis:
+
+HGT Candidate Filtering Criteria:
+- Minimum identity: 75%
+- Maximum insect/plant identity: 50%
+- Minimum difference: 20%
+- Maximum identity: 90% (to exclude universally conserved proteins)
 
 ## Analyze results:
+
+filter_bkins_v_oak.py:
+Finds B kinseyi proteins for which identity to an oak protein is significantly higher than to Nasonia or Apis
+
+filter_qvirg_v_bkins.py: 
+Finds Q virginiana proteins for which identity to a wasp protein is significantly higher than to Populus or Arabidopsis
 
 filter_fungal_hgt.py: 
 Finds Q virginiana proteins for which identity to a fungal protein is significantly higher than to Populus or Arabidopsis
@@ -62,5 +79,7 @@ filter_wasp_fungal_hgt.py:
 Finds B kinseyi proteins for which identity to a fungal protein is significantly higher than to Nasonia or Apis
 
 filter_oak_bact_hgt.py:
-Finds Q virginiana proteins for which identity to a fungal protein is significantly higher than to Populus or Arabidopsis
+Finds Q virginiana proteins for which identity to a bacterial protein is significantly higher than to Populus or Arabidopsis
 
+filter_wasp_hgt.py:
+Finds B kinseyi proteins for which identity to a bacterial protein is significantly higher than to Nasonia or Apis

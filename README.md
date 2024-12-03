@@ -64,22 +64,60 @@ HGT Candidate Filtering Criteria:
 - Minimum difference: 20% (eliminate proteins that are very similar to both potential donor and to neighbors)
 - Maximum identity: 90% (to exclude universally conserved proteins)
 
-## Analyze results:
+## Analyze Results
 
-filter_bkins_v_oak.py:
-Finds B kinseyi proteins for which identity to an oak protein is significantly higher than to Nasonia or Apis
+### filter_bkins_v_oak.py
+**Description**: Finds *B. kinseyi* proteins for which identity to an oak protein is significantly higher than to *Nasonia* or *Apis*.
 
-filter_qvirg_v_bkins.py: 
-Finds Q virginiana proteins for which identity to a wasp protein is significantly higher than to Populus or Arabidopsis
+- **Result**: No candidates.
 
-filter_fungal_hgt.py: 
-Finds Q virginiana proteins for which identity to a fungal protein is significantly higher than to Populus or Arabidopsis
+---
 
-filter_wasp_fungal_hgt.py:
-Finds B kinseyi proteins for which identity to a fungal protein is significantly higher than to Nasonia or Apis
+### filter_qvirg_v_bkins.py
+**Description**: Finds *Q. virginiana* proteins for which identity to a *B. kinseyi* protein is significantly higher than to *Populus* or *Arabidopsis*.
 
-filter_oak_bact_hgt.py:
-Finds Q virginiana proteins for which identity to a bacterial protein is significantly higher than to Populus or Arabidopsis
+- **Result**: No candidates.
 
-filter_wasp_hgt.py:
-Finds B kinseyi proteins for which identity to a bacterial protein is significantly higher than to Nasonia or Apis
+---
+
+### filter_fungal_hgt.py
+**Description**: Finds *Q. virginiana* proteins for which identity to a fungal protein is significantly higher than to *Populus* or *Arabidopsis*.
+
+- **Result**: 1 potential HGT candidate:
+
+| Oak_protein                            | Best_fungal_hit      | Fungal_identity | Best_plant_hit           | Plant_identity | Difference |
+|----------------------------------------|----------------------|-----------------|--------------------------|----------------|------------|
+| Qv_Qvirginiana.HAP1.v1.g2518.t1       | XP_024712885.1       | 76.5            | Pt_XP_052308549.1        | 42.2           | 34.2       |
+
+This is [protoheme IX farnesyltransferase, mitochondrial [Candidozyma pseudohaemuli]](https://www.ncbi.nlm.nih.gov/protein/XP_024712885.1/).
+
+- **Assessment**: Not a likely candidate for genuine HGT.
+
+---
+
+### filter_wasp_fungal_hgt.py
+**Description**: Finds *B. kinseyi* proteins for which identity to a fungal protein is significantly higher than to *Nasonia* or *Apis*.
+
+- **Result**: 1 potential HGT candidate:
+
+| Query_protein           | Best_fungal_hit      | Fungal_identity | Best_insect_hit       | Insect_identity | Difference |
+|--------------------------|----------------------|-----------------|-----------------------|-----------------|------------|
+| Bk_XP_033211786.1       | XP_003671371.2       | 77.8            | Nv_XP_031779649.1     | 48.1            | 29.7       |
+
+This is [hypothetical protein NDAI_0G03510 [Naumovozyma dairenensis CBS 421]](https://www.ncbi.nlm.nih.gov/protein/XP_003671371.2/).
+
+- **Assessment**: Not a likely candidate for genuine HGT.
+
+---
+
+### filter_oak_bact_hgt.py
+**Description**: Finds *Q. virginiana* proteins for which identity to a bacterial protein is significantly higher than to *Populus* or *Arabidopsis*.
+
+- **Result**: (BLAST outputs were deleted but there were no candidates.)
+
+---
+
+### filter_wasp_hgt.py
+**Description**: Finds *B. kinseyi* proteins for which identity to a bacterial protein is significantly higher than to *Nasonia* or *Apis*.
+
+- **Result**: (BLAST outputs were deleted but there were no candidates.)

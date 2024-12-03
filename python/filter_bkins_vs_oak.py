@@ -24,18 +24,27 @@ def parse_blast_results(blast_file):
     print("Found hits for {} query proteins".format(len(hits)))
     return hits
 
-def find_candidates(hits, min_difference=5):  # Adjust min_difference as needed
-    print("Finding candidates with higher similarity to oak than to Nasonia or Apis...")
+def find_candidates(hits, min_difference=20, min_oak=75, max_insect=50, max_identity=90):
+    print("Finding candidates with updated criteria...")
     candidates = []
     for query_id, categories in hits.items():
         if not categories['oak'] or not categories['insect']:
             continue
+        
         best_oak = max(categories['oak'], key=lambda x: x['identity'])
         best_insect = max(categories['insect'], key=lambda x: x['identity'])
+        
         oak_id = best_oak['identity']
         insect_id = best_insect['identity']
         difference = oak_id - insect_id
-        if difference >= min_difference:
+        
+        # Apply the filtering criteria
+        if (
+            oak_id >= min_oak and
+            insect_id <= max_insect and
+            difference >= min_difference and
+            oak_id <= max_identity
+        ):
             candidates.append({
                 'query': query_id,
                 'oak_hit': best_oak['subject'],
@@ -45,6 +54,7 @@ def find_candidates(hits, min_difference=5):  # Adjust min_difference as needed
                 'difference': difference
             })
     return candidates
+
 
 def main():
     if len(sys.argv) != 2:

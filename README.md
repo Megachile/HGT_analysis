@@ -59,9 +59,9 @@ blasts the Q virginiana proteins against P trichocarpa, A thaliana, and the comb
 # Analysis:
 
 HGT Candidate Filtering Criteria:
-- Minimum identity: 75%
-- Maximum insect/plant identity: 50%
-- Minimum difference: 20%
+- Minimum identity: 75% (eliminate low-similarity matches likely to be spurious)
+- Maximum own-lineage identity: 50% (remove matches that are highly similar to phylogenetic neighbors)
+- Minimum difference: 20% (eliminate proteins that are very similar to both potential donor and to neighbors)
 - Maximum identity: 90% (to exclude universally conserved proteins)
 
 ## Analyze results:

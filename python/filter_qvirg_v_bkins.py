@@ -22,18 +22,27 @@ def parse_blast_results(blast_file):
     print("Found hits for {} query proteins".format(len(hits)))
     return hits
 
-def find_candidates(hits, min_difference=5):  # Adjust the threshold as needed
-    print("Finding candidates with higher similarity to wasp than to other proteins...")
+def find_candidates(hits, min_difference=20, min_wasp=75, max_other=50, max_identity=90):
+    print("Finding HGT candidates with updated criteria...")
     candidates = []
     for query_id, categories in hits.items():
         if not categories['wasp'] or not categories['other']:
             continue
+        
         best_wasp = max(categories['wasp'], key=lambda x: x['identity'])
         best_other = max(categories['other'], key=lambda x: x['identity'])
+        
         wasp_id = best_wasp['identity']
         other_id = best_other['identity']
         difference = wasp_id - other_id
-        if difference >= min_difference:
+        
+        # Apply the filtering criteria
+        if (
+            wasp_id >= min_wasp and
+            other_id <= max_other and
+            difference >= min_difference and
+            wasp_id <= max_identity
+        ):
             candidates.append({
                 'query': query_id,
                 'wasp_hit': best_wasp['subject'],

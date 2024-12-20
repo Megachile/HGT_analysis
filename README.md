@@ -22,14 +22,14 @@ Belonocnema kinseyi (Build: GCF_010883055.1/B_treatae_v1)
 
 3. Bacterial data:
 - NCBI RefSeq bacterial protein sequences
-- Source: ftp://ftp.ncbi.nlm.nih.gov/refseq/release/bacteria/
+- Source: ftp://ftp.ncbi.nlm.nih.gov/refseq/release/bacteria/ (sourced on September 12, 2024)
 - Database created using makeblastdb with protein sequence type (-dbtype prot)
 
 
   
 4. Fungi:
 - NCBI RefSeq fungal protein sequences
-- Source: ftp.ncbi.nlm.nih.gov/refseq/release/fungi/fungi.*.protein.faa.gz
+- Source: ftp.ncbi.nlm.nih.gov/refseq/release/fungi/fungi.*.protein.faa.gz (sourced on September 12, 2024)
 - Database created using makeblastdb with protein sequence type (-dbtype prot)
 
 # Scripts: 

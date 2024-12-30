@@ -121,3 +121,40 @@ This is [hypothetical protein NDAI_0G03510 [Naumovozyma dairenensis CBS 421]](ht
 **Description**: Finds *B. kinseyi* proteins for which identity to a bacterial protein is significantly higher than to *Nasonia* or *Apis*.
 
 - **Result**: (BLAST outputs were deleted but there were no candidates.)
+- 
+
+# kmer analysis
+
+check_fasta_format.py - look for issues in the formatting of the genomes that will be an obstacle to kmerizing them
+conda install -n genomics biopython - install biopython
+clean_genome.py - write cleanup script
+clean_genomes.slurm - run cleanup script
+conda install -c bioconda kmc bwa samtools - install kmc and bwa and samtools
+
+# Create directories for k-mer analysis
+mkdir -p /export/martinsons/adam/kmer_analysis/{kmers,shared,mapped}
+mkdir -p /export/martinsons/adam/kmer_analysis/temp  # KMC needs a temp directory
+
+using a kmer length of 31
+run_kmer_analysis.slurm - reciprocally checks for kmer matches
+
+This found: 
+Q. virginiana coverage:
+Average coverage: 0.000951613
+Regions with coverage: 597155
+
+B. kinseyi coverage:
+Average coverage: 0.000481438
+Regions with coverage: 470286
+
+conda install -c bioconda pysam - install pysam
+
+find_clusters.py - write script to find overlapping matches 
+find_clusters.slurm - run script to find overlapping matches
+
+conda install -c bioconda bedtools - install bedtools
+
+extract_and_blast.py - script to pull out the nucleotide sequences associated with the top matches
+
+Results: 
+Lots of highly repetitive sequences in both directions, which can't be BLASTed and are not likely to be HGT. One high match density region in the B kinseyi genome turns out to be an insect LSU rRNA sequence. Also not likely to be HGT.

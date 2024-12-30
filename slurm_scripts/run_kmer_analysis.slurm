@@ -3,10 +3,11 @@
 #SBATCH --output=/export/martinsons/adam/logs/kmer_analysis_%j.out
 #SBATCH --error=/export/martinsons/adam/logs/kmer_analysis_%j.err
 #SBATCH --time=24:00:00
-#SBATCH --mem=64G
-#SBATCH --cpus-per-task=16
+#SBATCH --mem=32G
+#SBATCH --cpus-per-task=8
 #SBATCH --partition=ceti
 #SBATCH --nodes=1
+#SBATCH --exclude=taos01  # exclude the down node
 
 # Set paths
 GENOME_DIR="/export/martinsons/adam/input_sequences/cleaned"
@@ -50,12 +51,12 @@ bwa index ${GENOME_DIR}/B_kinseyi_genome.cleaned.fna
 
 # Map shared k-mers back to Q. virginiana genome
 echo "Mapping shared k-mers to Q. virginiana genome..."
-bwa mem -t 16 ${GENOME_DIR}/Q_virginiana_genome.cleaned.fa \
+bwa mem -t 8 ${GENOME_DIR}/Q_virginiana_genome.cleaned.fa \
     ${SHARED_DIR}/shared_kmers.fasta > ${MAPPED_DIR}/shared_kmers_qv.sam
 
 # Map shared k-mers back to B. kinseyi genome
 echo "Mapping shared k-mers to B. kinseyi genome..."
-bwa mem -t 16 ${GENOME_DIR}/B_kinseyi_genome.cleaned.fna \
+bwa mem -t 8 ${GENOME_DIR}/B_kinseyi_genome.cleaned.fna \
     ${SHARED_DIR}/shared_kmers.fasta > ${MAPPED_DIR}/shared_kmers_bk.sam
 
 # Convert SAMs to sorted BAMs
